@@ -8,7 +8,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    debugger
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to root_path
+      flash[:success] = "Successfully created user"
+    else
+      render :new
+      flash[:error] = "Unable to create user"
+    end
   end
 
   private
